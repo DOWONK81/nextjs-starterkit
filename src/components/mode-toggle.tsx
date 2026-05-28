@@ -17,7 +17,7 @@ export function ModeToggle() {
   return (
     <DropdownMenu>
       {/* DropdownMenuTrigger는 @base-ui/react 기반으로 렌더됨 */}
-      <DropdownMenuTrigger className="inline-flex h-8 w-8 items-center justify-center rounded-lg border border-input bg-background transition-colors hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
+      <DropdownMenuTrigger className="relative inline-flex h-8 w-8 items-center justify-center rounded-lg border border-input bg-background transition-colors hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
         {/* 라이트 모드일 때 보이는 태양 아이콘 */}
         <Sun className="h-4 w-4 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
         {/* 다크 모드일 때 보이는 달 아이콘 (절대 위치로 겹쳐서 표시) */}
