@@ -1,0 +1,18 @@
+{
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write|MultiEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "shell": "powershell",
+            "statusMessage": "타입 체크 + Lint 실행 중...",
+            "timeout": 120,
+            "command": "$raw = [Console]::In.ReadToEnd(); $f = ($raw | ConvertFrom-Json).tool_input.file_path; if ($f -notmatch '\\.tsx?$') { exit 0 }; $tsc = & npx tsc --noEmit 2>&1; $tscOk = $LASTEXITCODE -eq 0; $lint = & npx eslint $f 2>&1; $lintOk = $LASTEXITCODE -eq 0; if ($tscOk -and $lintOk) { exit 0 }; Write-Output '[자동 검사 실패]'; if (-not $tscOk) { Write-Output '== 타입 오류 (tsc) =='; Write-Output ($tsc | Out-String) }; if (-not $lintOk) { Write-Output '== Lint 오류 (eslint) =='; Write-Output ($lint | Out-String) }; exit 2"
+          }
+        ]
+      }
+    ]
+  }
+}
